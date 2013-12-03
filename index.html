@@ -104,7 +104,7 @@ traffic generators.</p>
 through the test interface. Don't test on the same interface you ssh'ed into.</p>
 
 <p>Download latest and install netmap from <a href="http://info.iet.unipi.it/%7Eluigi/netmap/">http://info.iet.unipi.it/~luigi/netmap/</a>
-If you extracted netmap into /usr/src/ you can build normally. Otherwise you 
+If you extracted netmap into <strong>/usr/src/</strong> or <strong>/usr/local/src</strong> you can build normally. Otherwise you 
 will have to specify the netmap source directory, for example:</p>
 
 <pre><code>./configure --with-netmap=/home/fklassen/git/netmap
@@ -113,17 +113,10 @@ sudo make install
 </code></pre>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
-
-<p>Generally speaking, most people would first run tcpprep against a pcap file to create a cache file which splits traffic between client and server if they are testing an inline device like a firewall or IPS. Then depending on their network setup and where the pcap was captured, they would use tcprewrite to edit the packets so that the device under test will examine them properly. Finally, tcpreplay is used to replay the pcap onto the network to do the test, while tcpliveplay is used to replay pcaps with TCP-only traffic onto the network.</p>
-
-<h2>
 <a name="support" class="anchor" href="#support"><span class="octicon octicon-link"></span></a>Support</h2>
 
-<p>If you have a question or think you are experiencing a bug, it is important
-that you provide enough information for us to help you.  Failure to provide
-enough information will likely cause your email to be ignored or get an
-annoyed reply from the author.</p>
+<p>If you have a question or think you are experiencing a bug, submit them <a href="https://github.com/appneta/tcpreplay/issues">here</a>. It is important
+that you provide enough information for us to help you.</p>
 
 <p>If your problem has to do with COMPILING tcpreplay:</p>
 
@@ -131,7 +124,8 @@ annoyed reply from the author.</p>
 <li>Version of tcpreplay you are trying to compile</li>
 <li>Platform (Red Hat Linux 9 on x86, Solaris 7 on SPARC, OS X on PPC, etc)</li>
 <li>Contents of config.status</li>
-<li>Output from 'make'</li>
+<li>Output from <strong>configure</strong> and <strong>make</strong>
+</li>
 <li>Any additional information you think that would be useful.</li>
 </ul><p>If your problem has to do with RUNNING tcpreplay or one of the sub-tools:</p>
 
