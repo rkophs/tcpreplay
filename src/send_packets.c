@@ -32,6 +32,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <time.h>
 
 #include "tcpreplay_api.h"
 #include "timestamp_trace.h"
@@ -484,6 +485,9 @@ send_packets(tcpreplay_t *ctx, pcap_t *pcap, int idx)
      * Keep sending while we have packets or until
      * we've sent enough packets
      */
+
+    int32_t r = rand();
+
     while ((pktdata = get_next_packet(ctx, pcap, &pkthdr, idx, prev_packet)) != NULL) {
         /* die? */
         if (ctx->abort)
@@ -517,7 +521,7 @@ send_packets(tcpreplay_t *ctx, pcap_t *pcap, int idx)
 
 #if defined TCPREPLAY && defined TCPREPLAY_EDIT
         pkthdr_ptr = &pkthdr;
-        if (tcpedit_packet(tcpedit, &pkthdr_ptr, &pktdata, sp->cache_dir) == -1) {
+        if (tcpedit_packet_loop(tcpedit, &pkthdr_ptr, &pktdata, sp->cache_dir, r) == -1) {
             errx(-1, "Error editing packet #" COUNTER_SPEC ": %s", packetnum, tcpedit_geterr(tcpedit));
         }
         pktlen = options->use_pkthdr_len ? pkthdr_ptr->len : pkthdr_ptr->caplen;

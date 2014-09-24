@@ -67,6 +67,13 @@ tcpedit_checkdir(tcpedit_t *tcpedit, tcpr_dir_t direction)
     return 0;
 }
 
+int
+tcpedit_packet_loop(tcpedit_t *tcpedit, struct pcap_pkthdr **pkthdr,
+        u_char **pktdata, tcpr_dir_t direction, int32_t loop_seed)
+{   
+    tcpedit->seed = loop_seed;
+    return tcpedit_packet(tcpedit, pkthdr, pktdata, direction);
+}
 
 /**
  * \brief Edit the given packet
